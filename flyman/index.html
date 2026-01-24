@@ -91,46 +91,20 @@
 
         var meta = document.createElement('meta');
         meta.name = 'viewport';
-        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=no';
+        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
         document.getElementsByTagName('head')[0].appendChild(meta);
         container.className = "unity-mobile";
         canvas.className = "unity-mobile";
+
+        // To lower canvas resolution on mobile devices to gain some
+        // performance, uncomment the following line:
+        // config.devicePixelRatio = 1;
+      } else {
+        // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
+
+        canvas.style.width = "800px";
+        canvas.style.height = "600px";
       }
-
-      //   // To lower canvas resolution on mobile devices to gain some
-      //   // performance, uncomment the following line:
-      //   // config.devicePixelRatio = 1;
-
-
-      // } else {
-      //   // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
-
-      //   canvas.style.width = "800px";
-      //   canvas.style.height = "600px";
-      // }
-      function resizeUnityCanvas() {
-        const canvas = document.getElementById("unity-canvas");
-
-        const targetAspect = 600 / 450;
-
-        const windowWidth = window.innerWidth;
-        const windowHeight = window.innerHeight;
-
-        let width = windowWidth;
-        let height = windowWidth / targetAspect;
-
-        if (height > windowHeight) {
-            height = windowHeight;
-            width = windowHeight * targetAspect;
-        }
-
-        canvas.style.width = width + "px";
-        canvas.style.height = height + "px";
-
-        canvas.style.left = ((windowWidth - width) / 2) + "px";
-        canvas.style.top = ((windowHeight - height) / 2) + "px";
-      }
-      window.addEventListener("resize", resizeUnityCanvas);
 
       loadingBar.style.display = "block";
 
@@ -140,7 +114,6 @@
       script.src = loaderUrl;
       script.onload = () => {
         createUnityInstance(canvas, config, (progress) => {
-          resizeUnityCanvas();
           progressBarFull.style.width = 100 * progress + "%";
               }).then((unityInstance) => {
                 gameInstance = unityInstance;
