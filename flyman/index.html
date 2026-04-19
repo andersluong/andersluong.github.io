@@ -59,10 +59,11 @@
 
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/flyman.loader.js";
+      var compressed = false ? ".unityweb" : "";
       var config = {
-        dataUrl: buildUrl + "/flyman.data",
-        frameworkUrl: buildUrl + "/flyman.framework.js",
-        codeUrl: buildUrl + "/flyman.wasm",
+        dataUrl: buildUrl + "/flyman.data" + compressed,
+        frameworkUrl: buildUrl + "/flyman.framework.js" + compressed,
+        codeUrl: buildUrl + "/flyman.wasm" + compressed,
         streamingAssetsUrl: "StreamingAssets",
         companyName: "FlyManTeam",
         productName: "FlyMan",
@@ -127,8 +128,6 @@
       }
 
       loadingBar.style.display = "block";
-
-      var gameInstance;
       
       var script = document.createElement("script");
       script.src = loaderUrl;
@@ -137,7 +136,7 @@
           resizeUnityCanvas();
           progressBarFull.style.width = 100 * progress + "%";
               }).then((unityInstance) => {
-                gameInstance = unityInstance;
+                window.unityInstance = unityInstance;
                 loadingBar.style.display = "none";
                 unityInstance.SendMessage(
                   "WebGLBridge",
