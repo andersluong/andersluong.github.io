@@ -58,16 +58,16 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/flyman.loader.js";
+      var loaderUrl = buildUrl + "/FlyMan.loader.js";
       var compressed = false ? ".unityweb" : "";
       var config = {
-        dataUrl: buildUrl + "/flyman.data" + compressed,
-        frameworkUrl: buildUrl + "/flyman.framework.js" + compressed,
-        codeUrl: buildUrl + "/flyman.wasm" + compressed,
+        dataUrl: buildUrl + "/FlyMan.data" + compressed,
+        frameworkUrl: buildUrl + "/FlyMan.framework.js" + compressed,
+        codeUrl: buildUrl + "/FlyMan.wasm" + compressed,
         streamingAssetsUrl: "StreamingAssets",
         companyName: "FlyManTeam",
         productName: "FlyMan",
-        productVersion: "2.0.0",
+        productVersion: "1.2.0",
         showBanner: unityShowBanner,
       };
 
@@ -93,7 +93,7 @@
       function resizeUnityCanvas() {
         const canvas = document.getElementById("unity-canvas");
 
-        if (!isMobile()) {
+	if (!isMobile() && window.innerWidth >= 800 && window.innerHeight >= 600) {
             canvas.style.width  = "800px";
             canvas.style.height = "600px";
             return;
